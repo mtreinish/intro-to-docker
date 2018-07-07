@@ -119,7 +119,21 @@
     \frametitle{Containers vs VMs}
     \centering
     \includegraphics[width=.9\textwidth]{containers-vs-vm.jpg}
+\end{frame}
 
+\begin{frame}
+    \frametitle{Why use containers?}
+    \begin{itemize}
+        \item Most of the same reasons as VMs
+        \item Faster startup time, just the time to:
+            \begin{itemize}
+                \item Create new directory
+                \item Setup the container's filesystem
+                \item Setup network, mounts, etc
+                \item Start the process
+            \end{itemize}
+        \item Better Resource utilization
+    \end{itemize}
 \end{frame}
 
 \section{Getting Started with Docker}
@@ -145,6 +159,21 @@
 \begin{frame}
     \frametitle{ssh-ing into a container}
     \textbf{\$ docker run -ti ubuntu bash}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Getting data into a container}
+    \begin{itemize}
+        \item Using env variables: \\
+           \textbf{\$ docker run -e INPUT=IamSECURE -P ubuntu bash}
+       \item Using Volumess: \\
+           \textbf{\$ mkdir -p /tmp/volume \&\& echo IamSECURE > /tmp/volume/pass}\\
+           \textbf{\$ docker run –i –t –v /tmp/volume:/volume ubuntu bash}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What Happened}
     \begin{itemize}
         \item Now the process is \textit{bash} instead of \textit{echo}
         \item But its still just a process
@@ -166,16 +195,6 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Getting data into a container}
-    \begin{itemize}
-        \item Using env variables: \\
-           \textbf{\$ docker run -e INPUT=IamSECURE -P ubuntu bash}
-       \item Using Volumess: \\
-           \textbf{\$ mkdir -p /tmp/volume \&\& echo IamSECURE > /tmp/volume/pass}\\
-           \textbf{\$ docker run –i –t –v /tmp/volume:/volume ubuntu bash}
-    \end{itemize}
-\end{frame}
 
 \section{Docker Images}
 \begin{frame}
@@ -203,6 +222,31 @@
         \item By default docker engines will look in DockerHub for images
         \item Browser interface for searching, descriptions of images
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Pick an application}
+    Look at dockerhub and find a container for that application. \\
+    For example:\\
+    \textbf{\$ docker run nginx}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What Happened}
+    \begin{itemize}
+        \item Pulled the nginx:latest image form dockerhub
+            \begin{itemize}
+                \item Dockerhub entry: \href{https://hub.docker.com/\_/nginx/}{https://hub.docker.com/\_/nginx/}
+                \item Layered ontop of debian:stretch-slim image: \href{https://hub.docker.com/\_/debian/}{https://hub.docker.com/\_/debian/}
+            \end{itemize}
+        \item Run that container
+        \item No configuration, just a base nginx
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Tie it together}
+    
 \end{frame}
 
 \subsection{Building Images}
@@ -237,6 +281,15 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{What happened}
+    \begin{itemize}
+        \item Pulled the registry container from dockerhub
+        \item Launched the container as a daemon (in the background)
+        \item Maps localhost port 5000 to port 5000 on the container
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Using a Local Registry}
     \textbf{\$ docker pull debian} \\
     \textbf{\$ docker image tag debian localhost:5000/myspecialimage} \\
@@ -244,7 +297,22 @@
     \textbf{\$ docker pull localhost:5000/myfirstimage} 
 \end{frame}
 
-\section{Questions?}
+\begin{frame}
+    \frametitle{What happened}
+    \begin{itemize}
+        \item Pulled the latest debian image from dockerhub
+        \item Tagged that image off the local registry
+        \item Push that tagged image to the local registry
+        \item Pull that image from the registry to the local machine
+    \end{itemize}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}
+    \frametitle{Conclusion}
+\end{frame}
+
+\subsection{Questions?}
 \begin{frame}
 \frametitle{Where to get more information}
     \begin{itemize}
