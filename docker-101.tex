@@ -83,9 +83,9 @@
     \begin{columns}[T]
         \begin{column}{.48\textwidth}
             \begin{itemize}
-                \item Tooling to manage platform
+                \item Tooling and platform to manage containers
                 \item Manages the lifecycle of containers
-                \item Simplified existing technologies for ease of use
+                \item Simplified interface on top of existing technologies for ease of use
             \end{itemize}
         \end{column}
         \begin{column}{.48\textwidth}
@@ -132,13 +132,12 @@
 \begin{frame}
     \frametitle{What Happened}
     \begin{itemize}
-        \item Docker created a directory with a ubuntu filesystem (image)
+        \item Docker created a directory with an Ubuntu filesystem (image)
         \item Docker created a new set of namespaces
         \item Ran a new process: echo Hello World
         \item Using those namespaces to isolate it from other processes
         \item Using that new directory as the root of the filesystem (chroot)
-        \item That's it!
-        \item Notice as a user I never installed ubuntu
+        \item Notice as a user I never installed Ubuntu
         \item Run it again, notice how quickly it ran
     \end{itemize}
 \end{frame}
@@ -155,20 +154,33 @@
 
 \begin{frame}
     \frametitle{Look under the covers}
-    \textbf{\$ docker run ubuntu ps -ef} \\
-    \\
-    Things to notice with these examples:
+    \textbf{\$ docker run ubuntu ps -ef}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Things to notice with these examples}
     \begin{itemize}
         \item Each container only sees its own processes
         \item Running as root
         \item Running as PID 1
     \end{itemize}
-
 \end{frame}
-\subsection{Docker Images}
+
+\begin{frame}
+    \frametitle{Getting data into a container}
+    \begin{itemize}
+        \item Using env variables: \\
+           \textbf{\$ docker run -e INPUT=IamSECURE -P ubuntu bash}
+       \item Using Volumess: \\
+           \textbf{\$ mkdir -p /tmp/volume \&\& echo IamSECURE > /tmp/volume/pass}\\
+           \textbf{\$ docker run –i –t –v /tmp/volume:/volume ubuntu bash}
+    \end{itemize}
+\end{frame}
+
+\section{Docker Images}
 \begin{frame}
     \frametitle{Docker images}
-        
+     
 \end{frame}
 
 \begin{frame}
@@ -193,24 +205,53 @@
     \end{itemize}
 \end{frame}
 
-\section{Building Images}
+\subsection{Building Images}
 \begin{frame}
     \frametitle{The Dockerfile}
-    
+    Reference Guide: \href{https://docs.docker.com/engine/reference/builder/}{https://docs.docker.com/engine/reference/builder/}
+    \begin{columns}[T]
+        \begin{column}{.41\textwidth}
+            \begin{itemize}
+                \item Input script to build images
+                \item Important instructions:
+                \begin{itemize}
+                    \item \textbf{FROM} - Set base image either another Dockerfile or from a registry
+                    \item \textbf{RUN} - Run a command inside a new layer
+                    \item \textbf{COPY} - Copy files or directories into the filesystem of the container
+                    \item \textbf{CMD} - Set a default command for executing a container
+                    \item \textbf{EXPOSE} - Specify a port the container listens on
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        \begin{column}{.55\textwidth}
+            \inputminted[fontsize=\scriptsize,breaklines,]{dockerfile}{examples/uwsgi/Dockerfile}
+        \end{column}
+    \end{columns}
 \end{frame}
 
-\section{Image Registry}
+
+\section{Image Registries}
 \begin{frame}
-    \frametitle{DockerHub}
-
+    \frametitle{Running your own registry}
+    \textbf{\$ docker run -d -p 5000:5000 --name registry registry}
 \end{frame}
 
-
+\begin{frame}
+    \frametitle{Using a Local Registry}
+    \textbf{\$ docker pull debian} \\
+    \textbf{\$ docker image tag debian localhost:5000/myspecialimage} \\
+    \textbf{\$ docker push localhost:5000/myfirstimage} \\
+    \textbf{\$ docker pull localhost:5000/myfirstimage} 
+\end{frame}
 
 \section{Questions?}
 \begin{frame}
 \frametitle{Where to get more information}
-
+    \begin{itemize}
+        \item Docker tutorial: \href{https://github.com/docker/labs/tree/master/beginner}{https://github.com/docker/labs/tree/master/beginner}
+        \item Docker documentation: \href{https://docs.docker.com/}{https://docs.docker.com/}
+        \item Best practice for Dockerfiles: \href{https://docs.docker.com/develop/develop-images/dockerfile\_best-practices/}{https://docs.docker.com/develop/develop-images/dockerfile\_best-practices/}
+    \end{itemize}
 \end{frame}
 
 \end{document}
