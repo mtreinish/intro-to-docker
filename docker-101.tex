@@ -86,6 +86,7 @@
                 \item Tooling and platform to manage containers
                 \item Manages the lifecycle of containers
                 \item Simplified interface on top of existing technologies for ease of use
+                \item Works on linux, Mac OS X, and Windows
             \end{itemize}
         \end{column}
         \begin{column}{.48\textwidth}
@@ -162,6 +163,15 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{What Happened}
+    \begin{itemize}
+        \item Now the process is \textit{bash} instead of \textit{echo}
+        \item But its still just a process
+        \item Look around, mess around, its isolated
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Getting data into a container}
     \begin{itemize}
         \item Using env variables: \\
@@ -169,15 +179,6 @@
        \item Using Volumess: \\
            \textbf{\$ mkdir -p /tmp/volume \&\& echo IamSECURE > /tmp/volume/pass}\\
            \textbf{\$ docker run –i –t –v /tmp/volume:/volume ubuntu bash}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{What Happened}
-    \begin{itemize}
-        \item Now the process is \textit{bash} instead of \textit{echo}
-        \item But its still just a process
-        \item Look around, mess around, its isolated
     \end{itemize}
 \end{frame}
 
@@ -245,8 +246,8 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Tie it together}
-    
+    \frametitle{Tie it all together}
+    \textbf{\$ docker run -v examples/nginx/content:/usr/share/nginx/html:ro nginx}
 \end{frame}
 
 \subsection{Building Images}
@@ -271,6 +272,36 @@
             \inputminted[fontsize=\scriptsize,breaklines,]{dockerfile}{examples/uwsgi/Dockerfile}
         \end{column}
     \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Building a Service image}
+    \inputminted[fontsize=\scriptsize,breaklines,linenos,frame=single]{dockerfile}{examples/mosquitto/Dockerfile}
+    \begin{itemize}
+        \item \textbf{\$ docker build -t mymosquitto examples/mosquitto}
+        \item \textbf{\$ docker run -P mymosquitto}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Back to nginx}
+    Build an image with the same content as our custom nginx before:
+    \inputminted[fontsize=\scriptsize,breaklines,linenos,frame=single]{dockerfile}{examples/nginx/Dockerfile}
+    \begin{itemize}
+        \item \textbf{\$ docker build -t mycustomhtml examples/nginx}
+        \item \textbf{\$ docker run -P mycustomhtml}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{What happened}
+    \begin{itemize}
+        \item Created a new image built on top of the nginx image from Docker Hub
+        \item It copies the content directory into the nginx shared content directory
+        \item Then run that image to get
+    \end{itemize}
+
 \end{frame}
 
 
