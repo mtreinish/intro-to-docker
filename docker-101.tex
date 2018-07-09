@@ -139,10 +139,23 @@
 \end{frame}
 
 \section{Getting Started with Docker}
+\begin{frame}
+    \frametitle{Installing Docker}
+    \begin{itemize}
+        \item On Linux - Distro Packages
+        \item From Docker:
+            \begin{itemize}
+                \item Mac: \href{https://docs.docker.com/docker-for-mac/install/}{https://docs.docker.com/docker-for-mac/install/}
+                \item Windows: \href{https://docs.docker.com/docker-for-windows/install/}{https://docs.docker.com/docker-for-windows/install/}
+                \item Ubuntu: \href{https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/}{https://docs.docker.com/v17.09/engine/installation/linux/docker-ce/ubuntu/}
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
 \subsection{Interacting with Docker}
 \begin{frame}
     \frametitle{First container}
-    \textbf{\$ docker run ubuntu echo Hello World} \\
+    {\LARGE \textbf{\$ docker run ubuntu echo Hello World}} \\
 \end{frame}
 
 \begin{frame}
@@ -160,7 +173,7 @@
 
 \begin{frame}
     \frametitle{ssh-ing into a container}
-    \textbf{\$ docker run -ti ubuntu bash}
+    {\LARGE \textbf{\$ docker run -ti ubuntu bash}}
 \end{frame}
 
 \begin{frame}
@@ -185,7 +198,7 @@
 
 \begin{frame}
     \frametitle{Look under the covers}
-    \textbf{\$ docker run ubuntu ps -ef}
+    {\LARGE \textbf{\$ docker run ubuntu ps -ef}}
 \end{frame}
 
 \begin{frame}
@@ -201,13 +214,24 @@
 \section{Docker Images}
 \begin{frame}
     \frametitle{Docker images}
-     
+    \begin{columns}[T]
+        \begin{column}{.48\textwidth}
+            \begin{itemize}
+                \item Applications are packaged as images
+                \item Built up of layers
+                \item
+            \end{itemize}
+        \end{column}
+        \begin{column}{.48\textwidth}
+ 
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Layering}
     \begin{itemize}
-        \item Docker uses a copy-on-write (union) filesystem
+        \item Docker uses a copy-on-write filesystem
         \item New files (or modifications) are only visible to current/above layers
         \item Layers allow for reuse
         \item Images are tarballs of layers
@@ -228,9 +252,8 @@
 
 \begin{frame}
     \frametitle{Pick an application}
-    Look at dockerhub and find a container for that application. \\
-    For example:\\
-    \textbf{\$ docker run nginx}
+    Look at dockerhub and find a container for that application. \\ \\
+    {\LARGE \textbf{\$ docker run nginx}}
 \end{frame}
 
 \begin{frame}
@@ -255,24 +278,22 @@
 \begin{frame}
     \frametitle{The Dockerfile}
     Reference Guide: \href{https://docs.docker.com/engine/reference/builder/}{https://docs.docker.com/engine/reference/builder/}
-    \begin{columns}[T]
-        \begin{column}{.41\textwidth}
-            \begin{itemize}
-                \item Input script to build images
-                \item Important instructions:
-                \begin{itemize}
-                    \item \textbf{FROM} - Set base image either another Dockerfile or from a registry
-                    \item \textbf{RUN} - Run a command inside a new layer
-                    \item \textbf{COPY} - Copy files or directories into the filesystem of the container
-                    \item \textbf{CMD} - Set a default command for executing a container
-                    \item \textbf{EXPOSE} - Specify a port the container listens on
-                \end{itemize}
-            \end{itemize}
-        \end{column}
-        \begin{column}{.55\textwidth}
-            \inputminted[fontsize=\scriptsize,breaklines,]{dockerfile}{examples/uwsgi/Dockerfile}
-        \end{column}
-    \end{columns}
+    \begin{itemize}
+        \item Input script to build images
+        \item Important instructions:
+        \begin{itemize}
+            \item \textbf{FROM} - Set base image either another Dockerfile or from a registry
+            \item \textbf{RUN} - Run a command inside a new layer
+            \item \textbf{COPY} - Copy files or directories into the filesystem of the container
+            \item \textbf{CMD} - Set a default command for executing a container
+            \item \textbf{EXPOSE} - Specify a port the container listens on
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example Dockerfile}
+    \inputminted[fontsize=\small,breaklines,linenos,frame=single]{dockerfile}{examples/uwsgi/Dockerfile}
 \end{frame}
 
 \begin{frame}
@@ -288,10 +309,10 @@
 \begin{frame}
     \frametitle{Back to nginx}
     Build an image with the same content as our custom nginx before:
-    \inputminted[fontsize=\scriptsize,breaklines,linenos,frame=single]{dockerfile}{examples/nginx/Dockerfile}
+    \inputminted[fontsize=\large,breaklines,linenos,frame=single]{dockerfile}{examples/nginx/Dockerfile}
     \begin{itemize}
-        \item \textbf{\$ docker build -t mycustomhtml examples/nginx}
-        \item \textbf{\$ docker run -P mycustomhtml}
+        \item {\large \textbf{\$ docker build -t mycustomhtml examples/nginx}}
+        \item {\large \textbf{\$ docker run -P mycustomhtml}}
     \end{itemize}
 \end{frame}
 
@@ -309,7 +330,7 @@
 \section{Image Registries}
 \begin{frame}
     \frametitle{Running your own registry}
-    \textbf{\$ docker run -d -p 5000:5000 --name registry registry}
+    {\Large \textbf{\$ docker run -d -p 5000:5000 \-\-name registry registry}}
 \end{frame}
 
 \begin{frame}
@@ -342,6 +363,10 @@
 \section{Conclusion}
 \begin{frame}
     \frametitle{Conclusion}
+    \begin{itemize}
+        \item Docker provides a simple to use interface on top of containers
+        \item Enables to build packages
+    \end{itemize}
 \end{frame}
 
 \subsection{Questions?}
