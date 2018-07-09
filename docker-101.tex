@@ -125,7 +125,7 @@
 \begin{frame}
     \frametitle{Why use containers?}
     \begin{itemize}
-        \item Most of the same reasons as VMs
+        \item Most of the same reasons as VMs (like isolation)
         \item Faster startup time, just the time to:
             \begin{itemize}
                 \item Create new directory
@@ -134,6 +134,7 @@
                 \item Start the process
             \end{itemize}
         \item Better Resource utilization
+        \item Reusability and distributability
     \end{itemize}
 \end{frame}
 
@@ -247,7 +248,7 @@
 
 \begin{frame}
     \frametitle{Tie it all together}
-    \textbf{\$ docker run -v examples/nginx/content:/usr/share/nginx/html:ro nginx}
+    \textbf{\$ docker run -P -v examples/nginx/content:/usr/share/nginx/html:ro nginx}
 \end{frame}
 
 \subsection{Building Images}
@@ -279,7 +280,7 @@
     \inputminted[fontsize=\scriptsize,breaklines,linenos,frame=single]{dockerfile}{examples/mosquitto/Dockerfile}
     \begin{itemize}
         \item \textbf{\$ docker build -t mymosquitto examples/mosquitto}
-        \item \textbf{\$ docker run -P mymosquitto}
+        \item \textbf{\$ docker run -e MQTT\_PASS=SecurePASS -P mymosquitto}
     \end{itemize}
 \end{frame}
 
@@ -324,8 +325,8 @@
     \frametitle{Using a Local Registry}
     \textbf{\$ docker pull debian} \\
     \textbf{\$ docker image tag debian localhost:5000/myspecialimage} \\
-    \textbf{\$ docker push localhost:5000/myfirstimage} \\
-    \textbf{\$ docker pull localhost:5000/myfirstimage} 
+    \textbf{\$ docker push localhost:5000/myspecialimage} \\
+    \textbf{\$ docker pull localhost:5000/myspecialimage}
 \end{frame}
 
 \begin{frame}
