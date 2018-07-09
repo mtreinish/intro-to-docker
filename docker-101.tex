@@ -190,7 +190,7 @@
     \begin{itemize}
         \item Using env variables: \\
            \textbf{\$ docker run -e INPUT=IamSECURE -P ubuntu bash}
-       \item Using Volumess: \\
+       \item Using Volumes: \\
            \textbf{\$ mkdir -p /tmp/volume \&\& echo IamSECURE > /tmp/volume/pass}\\
            \textbf{\$ docker run –i –t –v /tmp/volume:/volume ubuntu bash}
     \end{itemize}
@@ -337,6 +337,27 @@
 
 
 \section{Image Registries}
+\begin{frame}
+    \frametitle{Local Image Registry}
+    \begin{columns}[T]
+        \begin{column}{.48\textwidth}
+            \begin{itemize}
+                \item You can run a local registry to share images
+                \item Basically your own local Docker hub
+                \item Let's you control:
+                    \begin{itemize}
+                        \item Where your images are being stored
+                        \item The image creation and distribution pipeline
+                    \end{itemize}
+            \end{itemize}
+        \end{column}
+        \begin{column}{.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{registry.png}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 \begin{frame}
     \frametitle{Running your own registry}
     {\Large \textbf{\$ docker run -d -p 5000:5000 \-\-name registry registry}}
