@@ -217,25 +217,34 @@
     \begin{columns}[T]
         \begin{column}{.48\textwidth}
             \begin{itemize}
+                \item Tarball of container's filesystem and metadata
+                \item Makes sharing and distribution of containers easy
                 \item Applications are packaged as images
-                \item Built up of layers
-                \item
             \end{itemize}
         \end{column}
         \begin{column}{.48\textwidth}
- 
+            \centering
+            \includegraphics[width=.9\textwidth]{docker_images.png}
         \end{column}
     \end{columns}
 \end{frame}
 
 \begin{frame}
     \frametitle{Layering}
-    \begin{itemize}
-        \item Docker uses a copy-on-write filesystem
-        \item New files (or modifications) are only visible to current/above layers
-        \item Layers allow for reuse
-        \item Images are tarballs of layers
-    \end{itemize}
+    \begin{columns}[T]
+    \begin{column}{.48\textwidth}
+        \begin{itemize}
+            \item Docker uses a copy-on-write filesystem
+            \item New files (or modifications) are only visible to current/above layers
+            \item Layers allow for reuse
+            \item Images are tarballs of layers
+        \end{itemize}
+    \end{column}
+    \begin{column}{.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{layering.png}
+    \end{column}
+    \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -364,8 +373,11 @@
 \begin{frame}
     \frametitle{Conclusion}
     \begin{itemize}
-        \item Docker provides a simple to use interface on top of containers
-        \item Enables to build packages
+        \item Docker provides a simple to use interface for containers
+        \item Containers provide fast and lightweight isolation for applications
+        \item Docker enables building packages that are easily deployable
+        \item Large ecosystem of applications built for Docker
+        \item Image layering makes it simple to build off of existing images
     \end{itemize}
 \end{frame}
 
@@ -373,6 +385,7 @@
 \begin{frame}
 \frametitle{Where to get more information}
     \begin{itemize}
+        \item These Slides: \href{https://github.com/mtreinish/intro-to-docker}{https://github.com/mtreinish/intro-to-docker}
         \item Docker tutorial: \href{https://github.com/docker/labs/tree/master/beginner}{https://github.com/docker/labs/tree/master/beginner}
         \item Docker documentation: \href{https://docs.docker.com/}{https://docs.docker.com/}
         \item Best practice for Dockerfiles: \href{https://docs.docker.com/develop/develop-images/dockerfile\_best-practices/}{https://docs.docker.com/develop/develop-images/dockerfile\_best-practices/}
