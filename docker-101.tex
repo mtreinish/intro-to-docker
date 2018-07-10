@@ -189,7 +189,7 @@
     \frametitle{Getting data into a container}
     \begin{itemize}
         \item Using env variables: \\
-           \textbf{\$ docker run -e INPUT=IamSECURE -P ubuntu bash}
+           \textbf{\$ docker run -e INPUT=IamSECURE -P -it ubuntu bash}
        \item Using Volumes: \\
            \textbf{\$ mkdir -p /tmp/volume \&\& echo IamSECURE > /tmp/volume/pass}\\
            \textbf{\$ docker run –i –t –v /tmp/volume:/volume ubuntu bash}
